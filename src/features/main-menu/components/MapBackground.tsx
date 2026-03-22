@@ -23,6 +23,16 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({ section }) => {
   
   return (
     <div style={{ position: 'relative', width: '100%', touchAction: 'pan-y' }}>
+      {/* Invisible Touch Pad: Ensures entire background is sensitive to scroll for address bar hiding */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          zIndex: 1, 
+          backgroundColor: 'transparent',
+          pointerEvents: 'auto'
+        }} 
+      />
       <Image
         src={bgUrl}
         alt=""
