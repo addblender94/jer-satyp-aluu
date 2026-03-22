@@ -30,7 +30,8 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({ section }) => {
           inset: 0, 
           zIndex: 1, 
           backgroundColor: 'transparent',
-          pointerEvents: 'auto'
+          pointerEvents: 'auto',
+          touchAction: 'pan-y'
         }} 
       />
       <Image

@@ -25,7 +25,8 @@ export const VirtualSection: React.FC<VirtualSectionProps> = ({ section, childre
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        touchAction: 'pan-y'
       }}
     >
       {/* Background for this section */}

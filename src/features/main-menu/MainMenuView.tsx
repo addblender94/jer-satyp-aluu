@@ -244,10 +244,10 @@ export const MainMenuView: React.FC = () => {
           flexDirection: 'column',
           touchAction: (isMobileView && !isEditorMode) ? 'pan-y' : 'auto'
         }}
-        onMouseMove={onMouseMove}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
+        onMouseMove={isEditorMode ? onMouseMove : undefined}
+        onMouseDown={isEditorMode ? onMouseDown : undefined}
+        onMouseUp={isEditorMode ? onMouseUp : undefined}
+        onMouseLeave={isEditorMode ? onMouseUp : undefined}
         onScroll={(e) => {
           if (!isMobileView || isEditorMode) {
             setScrollPos(e.currentTarget.scrollTop)
