@@ -139,7 +139,25 @@ export const Toolbar: React.FC = () => {
     }
     const handleMouseUp = () => {
       setIsDragging(false)
-      // We don't reset isDragReal here, it's checked on click then reset on mousedown
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging || e.touches.length === 0) return
+      const touch = e.touches[0]
+      const dx = touch.clientX - dragRef.current.startX
+      const dy = touch.clientY - dragRef.current.startY
+      
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+        dragRef.current.isDragReal = true
+      }
+      
+      setToolbarPos({
+        x: dragRef.current.initialPos.x + dx,
+        y: dragRef.current.initialPos.y + dy,
+      })
+    }
+    const handleTouchEnd = () => {
+      setIsDragging(false)
     }
     
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -177,6 +195,8 @@ export const Toolbar: React.FC = () => {
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
+      window.addEventListener('touchmove', handleTouchMove, { passive: false })
+      window.addEventListener('touchend', handleTouchEnd)
     }
     
     window.addEventListener('keydown', handleKeyDown)
@@ -185,6 +205,8 @@ export const Toolbar: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseup', handleMouseUp)
+      window.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('touchend', handleTouchEnd)
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('mousedown', handleGlobalClick)
     }
@@ -198,6 +220,13 @@ export const Toolbar: React.FC = () => {
         onMouseDown={(e) => {
           setIsDragging(true)
           dragRef.current = { startX: e.clientX, startY: e.clientY, initialPos: { ...toolbarPos }, isDragReal: false }
+        }}
+        onTouchStart={(e) => {
+          if (e.touches.length > 0) {
+            const touch = e.touches[0]
+            setIsDragging(true)
+            dragRef.current = { startX: touch.clientX, startY: touch.clientY, initialPos: { ...toolbarPos }, isDragReal: false }
+          }
         }}
         onClick={() => {
           // Only open if we didn't just drag it across the screen
@@ -225,7 +254,8 @@ export const Toolbar: React.FC = () => {
           boxShadow: '0 0 20px rgba(212,175,55,0.3)',
           backdropFilter: 'blur(10px)',
           fontSize: '24px',
-          userSelect: 'none'
+          userSelect: 'none',
+          touchAction: 'none'
         }}
       >
         🎨

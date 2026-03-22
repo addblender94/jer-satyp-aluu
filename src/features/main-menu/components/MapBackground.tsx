@@ -22,7 +22,7 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({ section }) => {
   }
   
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ position: 'relative', width: '100%', touchAction: 'pan-y' }}>
       <Image
         src={bgUrl}
         alt=""

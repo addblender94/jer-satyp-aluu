@@ -241,7 +241,8 @@ export const MainMenuView: React.FC = () => {
           borderRadius: isMobileView ? '40px' : '0',
           transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          touchAction: (isMobileView && !isEditorMode) ? 'pan-y' : 'auto'
         }}
         onMouseMove={onMouseMove}
         onMouseDown={onMouseDown}
