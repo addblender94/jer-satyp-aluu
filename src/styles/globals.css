@@ -12,6 +12,6 @@
 
 body {
   background: black;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
 }

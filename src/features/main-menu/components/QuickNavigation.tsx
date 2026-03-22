@@ -48,17 +48,18 @@ export const QuickNavigation: React.FC = () => {
           padding: '1rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.6rem',
-          background: 'transparent',
           zIndex: 1000,
           position: isEditorMode ? 'relative' : 'fixed',
           bottom: isEditorMode ? 'auto' : '0',
           left: isEditorMode ? 'auto' : '0',
           right: isEditorMode ? 'auto' : '0',
-          paddingBottom: isEditorMode ? '1rem' : 'calc(1rem + env(safe-area-inset-bottom))'
+          paddingBottom: isEditorMode ? '1rem' : 'calc(1.2rem + env(safe-area-inset-bottom))',
+          background: (isMobile && !isEditorMode) ? 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' : 'transparent',
+          pointerEvents: 'none'
         }}
       >
-        {tempQuickLinks.map((link) => {
+        <div style={{ pointerEvents: 'auto', display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
+          {tempQuickLinks.map((link) => {
           // Convert bgColor HEX to RGBA with custom opacity
           const hexToRgba = (hex: string, alpha: number) => {
             const h = hex.replace('#', '');
@@ -112,13 +113,14 @@ export const QuickNavigation: React.FC = () => {
               {link.label}
             </motion.button>
           )
-        })}
+        }) }
         {isEditorMode && tempQuickLinks.length === 0 && (
           <div style={{ color: 'rgba(212,175,55,0.5)', textAlign: 'center', padding: '1rem', border: '1px dashed' }}>
             Навигация баскычтарын кошуңуз
           </div>
         )}
       </div>
+    </div>
     )
   }
 

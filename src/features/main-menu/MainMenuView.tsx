@@ -310,12 +310,16 @@ export const MainMenuView: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               style={{ 
                 color: tempHeaderColor ?? (sceneManager.activeScene?.headerColor || '#d4af37'), 
-                fontSize: tempHeaderFontSize ?? (sceneManager.activeScene?.headerFontSize || '1.4rem'), 
-                margin: 0, 
+                fontSize: isMobileView 
+                  ? (sceneManager.activeScene?.headerFontSize ? `calc(${sceneManager.activeScene.headerFontSize} * 0.75)` : '1.1rem') 
+                  : (tempHeaderFontSize ?? (sceneManager.activeScene?.headerFontSize || '1.4rem')),
+                margin: '0 auto',
+                maxWidth: isMobileView ? '90%' : 'none',
                 fontFamily: tempHeaderFontFamily ?? (sceneManager.activeScene?.headerFontFamily || 'inherit'),
                 textTransform: 'uppercase',
-                letterSpacing: '2px',
-                textShadow: '0 0 20px rgba(212,175,55,0.3)'
+                letterSpacing: isMobileView ? '1px' : '2px',
+                textShadow: '0 0 20px rgba(212,175,55,0.3)',
+                lineHeight: 1.2
               }}
             >
               {tempHeaderTitle ?? (sceneManager.activeScene?.headerTitle || sceneManager.activeScene?.name || 'JER SATYP ALUU')}
