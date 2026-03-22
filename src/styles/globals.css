@@ -10,6 +10,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: auto !important;
+  min-height: 100%;
+}
+
 body {
   background: black;
   overflow-x: hidden;
