@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useMemo, useCallback, useEffect } from 'react'
+import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapBackground } from './components/MapBackground'
 import { MapIcon } from './components/MapIcon'
@@ -73,7 +73,20 @@ export const MainMenuView: React.FC = () => {
   } = useEditor()
   
   const containerRef = useRef<HTMLDivElement>(null)
+  const [localScrollPos, setLocalScrollPos] = useState(0) // Renamed to avoid conflict with setScrollPos from useEditor
   
+  // Real-time synchronization for Mobile National Scroll
+  useEffect(() => {
+    if (!isMobileView || isEditorMode) return;
+    
+    const handleGlobalScroll = () => {
+      setScrollPos(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleGlobalScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleGlobalScroll);
+  }, [isMobileView, isEditorMode, setScrollPos]); // Added setScrollPos to dependencies
+
   // Use the "Drag Engine" (The Brain for movement)
   const { onMouseDown, onMouseMove, onMouseUp, isDragging } = useMapDrag(containerRef)
 
@@ -187,12 +200,12 @@ export const MainMenuView: React.FC = () => {
   return (
     <div style={{
       width: '100vw',
-      height: '100vh',
+      height: (isMobileView && !isEditorMode) ? 'auto' : '100vh',
       background: isMobileView ? '#1a1a1a' : 'transparent',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: (isMobileView && !isEditorMode) ? 'flex-start' : 'center',
       justifyContent: 'center',
-      overflow: 'hidden',
+      overflow: (isMobileView && !isEditorMode) ? 'visible' : 'hidden',
       position: 'relative'
     }}>
       {isMobileView && isEditorMode && (
@@ -217,22 +230,27 @@ export const MainMenuView: React.FC = () => {
         style={{
           width: isMobileView ? '100%' : '100vw',
           maxWidth: isMobileView ? '375px' : 'none',
-          height: isMobileView ? '100%' : '100vh',
+          height: (isMobileView && !isEditorMode) ? 'auto' : (isMobileView ? '100%' : '100vh'),
+          minHeight: (isMobileView && !isEditorMode) ? '100dvh' : 'auto',
           position: 'relative',
           overflowX: 'hidden',
-          overflowY: 'auto',
+          overflowY: (isMobileView && !isEditorMode) ? 'visible' : 'auto',
           background: `linear-gradient(to bottom, ${bg1}, ${bg2})`, 
           scrollBehavior: 'smooth',
           boxShadow: isMobileView ? '0 0 100px rgba(0,0,0,1), 0 0 0 12px #333, 0 0 0 15px #111' : 'none',
           borderRadius: isMobileView ? '40px' : '0',
-          transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+          transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'flex',
+          flexDirection: 'column'
         }}
         onMouseMove={onMouseMove}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
         onScroll={(e) => {
-          setScrollPos(e.currentTarget.scrollTop)
+          if (!isMobileView || isEditorMode) {
+            setScrollPos(e.currentTarget.scrollTop)
+          }
         }}
       >
         {/* Ambient Background for Mobile (Blurred Image) */}
@@ -282,6 +300,10 @@ export const MainMenuView: React.FC = () => {
             padding: '2.5rem 1rem 1.5rem',
             textAlign: 'center',
             background: `linear-gradient(to bottom, ${bg1}, ${bg2})`,
+            position: (isMobileView && !isEditorMode) ? 'sticky' : 'relative',
+            top: 0,
+            zIndex: 1001,
+            boxShadow: (isMobileView && !isEditorMode) ? '0 10px 30px rgba(0,0,0,0.5)' : 'none'
           }}>
             <motion.h1 
               initial={{ opacity: 0, y: -20 }}

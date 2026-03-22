@@ -51,6 +51,11 @@ export const QuickNavigation: React.FC = () => {
           gap: '0.6rem',
           background: 'transparent',
           zIndex: 1000,
+          position: isEditorMode ? 'relative' : 'fixed',
+          bottom: isEditorMode ? 'auto' : '0',
+          left: isEditorMode ? 'auto' : '0',
+          right: isEditorMode ? 'auto' : '0',
+          paddingBottom: isEditorMode ? '1rem' : 'calc(1rem + env(safe-area-inset-bottom))'
         }}
       >
         {tempQuickLinks.map((link) => {
