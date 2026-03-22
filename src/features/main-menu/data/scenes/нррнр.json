@@ -1,0 +1,14 @@
+{
+  "id": "нррнр",
+  "name": "нррнр",
+  "assetFolder": "main_menu",
+  "sections": [
+    {
+      "id": 1,
+      "url": "bg1.png",
+      "opacity": 1
+    }
+  ],
+  "locations": [],
+  "groupId": "group-1773851622318"
+}

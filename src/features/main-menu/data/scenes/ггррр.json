@@ -1,0 +1,13 @@
+{
+  "id": "ггррр",
+  "name": "ггррр",
+  "assetFolder": "main_menu",
+  "sections": [
+    {
+      "id": 1,
+      "url": "bg1.png",
+      "opacity": 1
+    }
+  ],
+  "locations": []
+}

@@ -1,0 +1,55 @@
+{
+  "id": "scene-2",
+  "name": "Scene 2",
+  "assetFolder": "level_1",
+  "sections": [
+    {
+      "id": 1,
+      "url": "fon1.png",
+      "opacity": 1
+    }
+  ],
+  "locations": [
+    {
+      "id": 20,
+      "name": "New Text",
+      "content": "Ошондуктан мен сени суйомун!",
+      "x": "30.31%",
+      "y": "25.12%",
+      "width": "30.00%",
+      "height": "10.00%",
+      "visualX": "30.16%",
+      "visualY": "24.98%",
+      "handleX": "29.84%",
+      "handleY": "24.75%",
+      "fontFamily": "Tektur",
+      "fontSize": "40px",
+      "fontWeight": "bold",
+      "color": "#5c491e",
+      "textShadowOpacity": 0.5,
+      "opacity": 0.65,
+      "targetSceneId": "main"
+    }
+  ],
+  "groupId": "group-1773851622318",
+  "groups": [],
+  "quickLinks": [
+    {
+      "id": 1774128533181,
+      "label": "New Button",
+      "order": 0,
+      "bgOpacity": 0.4,
+      "scale": 0.5,
+      "icon": "🗺️",
+      "targetSceneId": "main"
+    },
+    {
+      "id": 1774128576000,
+      "label": "New Button",
+      "order": 1,
+      "targetSceneId": "ггррр",
+      "scale": 0.5,
+      "bgOpacity": 0.45
+    }
+  ]
+}

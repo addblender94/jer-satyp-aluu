@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Bungee&family=Titan+One&family=Fredoka:wght@300..700&family=Press+Start+2P&family=Tektur:wght@400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}

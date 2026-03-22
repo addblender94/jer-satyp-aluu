@@ -1,0 +1,13 @@
+{
+  "id": "неае",
+  "name": "неае",
+  "assetFolder": "level_2",
+  "sections": [
+    {
+      "id": 1,
+      "url": "bg1.png",
+      "opacity": 1
+    }
+  ],
+  "locations": []
+}
