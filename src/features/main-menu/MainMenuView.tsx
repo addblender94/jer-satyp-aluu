@@ -195,7 +195,7 @@ export const MainMenuView: React.FC = () => {
       overflow: 'hidden',
       position: 'relative'
     }}>
-      {isMobileView && (
+      {isMobileView && isEditorMode && (
         <div style={{
           position: 'absolute',
           top: '20px',
@@ -206,17 +206,18 @@ export const MainMenuView: React.FC = () => {
           fontWeight: 'bold',
           letterSpacing: '1px',
           opacity: 0.6,
-          zIndex: 10
+          zIndex: 99999
         }}>
-          📱 MOBILE PREVIEW (375x812)
+          📱 MOBILE PREVIEW (Simulator)
         </div>
       )}
 
       <main
         ref={scrollRef}
         style={{
-          width: isMobileView ? '375px' : '100vw',
-          height: isMobileView ? '812px' : '100vh',
+          width: isMobileView ? '100%' : '100vw',
+          maxWidth: isMobileView ? '375px' : 'none',
+          height: isMobileView ? '100%' : '100vh',
           position: 'relative',
           overflowX: 'hidden',
           overflowY: 'auto',
@@ -278,7 +279,7 @@ export const MainMenuView: React.FC = () => {
         {isMobileView && (
           <header style={{
             width: '100%',
-            padding: '1.5rem 1rem 1rem',
+            padding: '2.5rem 1rem 1.5rem',
             textAlign: 'center',
             background: `linear-gradient(to bottom, ${bg1}, ${bg2})`,
           }}>
