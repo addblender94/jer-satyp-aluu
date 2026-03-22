@@ -92,6 +92,8 @@ export const MainMenuView: React.FC = () => {
 
   // Sync isDragging to global style to prevent selection effectively
   useEffect(() => {
+    if (!isEditorMode) return
+
     if (isDragging) {
       document.body.style.userSelect = 'none'
       document.body.style.cursor = 'grabbing'
@@ -103,7 +105,7 @@ export const MainMenuView: React.FC = () => {
       document.body.style.userSelect = ''
       document.body.style.cursor = ''
     }
-  }, [isDragging])
+  }, [isDragging, isEditorMode])
 
   const allElements = useMemo(() => {
     const combined = [...committedLocations, ...addedLocations]
@@ -228,8 +230,8 @@ export const MainMenuView: React.FC = () => {
       <main
         ref={scrollRef}
         style={{
-          width: isMobileView ? '100%' : '100vw',
-          maxWidth: isMobileView ? '375px' : 'none',
+          width: '100%',
+          maxWidth: (isMobileView && isEditorMode) ? '375px' : 'none',
           height: (isMobileView && !isEditorMode) ? 'auto' : (isMobileView ? '100%' : '100vh'),
           minHeight: (isMobileView && !isEditorMode) ? '100dvh' : 'auto',
           position: 'relative',
@@ -237,8 +239,8 @@ export const MainMenuView: React.FC = () => {
           overflowY: (isMobileView && !isEditorMode) ? 'visible' : 'auto',
           background: `linear-gradient(to bottom, ${bg1}, ${bg2})`, 
           scrollBehavior: 'smooth',
-          boxShadow: isMobileView ? '0 0 100px rgba(0,0,0,1), 0 0 0 12px #333, 0 0 0 15px #111' : 'none',
-          borderRadius: isMobileView ? '40px' : '0',
+          boxShadow: (isMobileView && isEditorMode) ? '0 0 100px rgba(0,0,0,1), 0 0 0 12px #333, 0 0 0 15px #111' : 'none',
+          borderRadius: (isMobileView && isEditorMode) ? '40px' : '0',
           transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           display: 'flex',
           flexDirection: 'column',

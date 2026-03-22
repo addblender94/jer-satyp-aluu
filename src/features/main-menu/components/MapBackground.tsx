@@ -27,6 +27,7 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({ section }) => {
       <div 
         id="background-master-hitbox"
         data-hitbox-id="-1"
+        onClick={(e) => { e.stopPropagation(); }}
         style={{ 
           position: 'absolute', 
           inset: 0, 

@@ -11,8 +11,7 @@
 }
 
 html, body {
-  height: auto !important;
-  min-height: 100%;
+  min-height: 100dvh;
 }
 
 body {
