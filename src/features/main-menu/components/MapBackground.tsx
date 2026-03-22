@@ -25,13 +25,18 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({ section }) => {
     <div style={{ position: 'relative', width: '100%', touchAction: 'pan-y' }}>
       {/* Invisible Touch Pad: Ensures entire background is sensitive to scroll for address bar hiding */}
       <div 
+        id="background-master-hitbox"
+        data-hitbox-id="-1"
         style={{ 
           position: 'absolute', 
           inset: 0, 
           zIndex: 1, 
           backgroundColor: 'transparent',
           pointerEvents: 'auto',
-          touchAction: 'pan-y'
+          touchAction: 'pan-y',
+          userSelect: 'none',
+          WebkitUserSelect: 'none',
+          WebkitTouchCallout: 'none'
         }} 
       />
       <Image
